@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Data</title>
+</head>
+<body>
+  <h1>Send Data to Google Sheets</h1>
+  <button onclick="sendData()">Send Data</button>
+
+  <script>
+    function sendData() {
+      const data = {
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        timestamp: new Date().toISOString()  // Optional: Add a timestamp
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbwuQ9JS-zwFQG7zGd0JdNuyJtOXwAL2MbbI-znDuGL6us1jmODDZzvGEhvA45A9dKOI3g/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.text())
+      .then(responseText => {
+        console.log('Response from server:', responseText);
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>
