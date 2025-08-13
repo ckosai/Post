@@ -1,33 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Send Data to Google Sheets</title>
-</head>
-<body>
-  <h1>Send Data to Google Sheets</h1>
-  <button onclick="sendData()">Send Data</button>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0d47a1" />
+  <title>Global Chat</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png" type="image/png">
 
   <script>
-    function sendData() {
-        const data = {
-            name: 'John Doe',
-            email: 'johndoe@example.com',
-            timestamp: new Date().toISOString()  // Optional: Add a timestamp
-        };
-
-        fetch('https://script.google.com/macros/s/AKfycbwuQ9JS-zwFQG7zGd0JdNuyJtOXwAL2MbbI-znDuGL6us1jmODDZzvGEhvA45A9dKOI3g/exec', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-            mode: 'cors',  // Ensure that CORS is handled
-            credentials: 'include',  // If you need to send cookies or authentication tokens
-        })
-        .then(response => response.json())  // Assuming the response is JSON
-        .then(json => console.log('Success:', json))
-        .catch(error => console.error('Error:', error));
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('Service Worker failed', err));
     }
   </script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+      margin: 0;
+      justify-content: center;
+      align-items: center;
+      background: #f0f0f0;
+    }
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="https://script.google.com/macros/s/AKfycbzVc9YFav49iIVwtRx4VrJtXhYXC0XSPiDRCO2uxTnLh6l2mEAHaPU174vVmenz-yUh/exec" width="100%" height="100%" frameborder="0"></iframe>
 </body>
 </html>
